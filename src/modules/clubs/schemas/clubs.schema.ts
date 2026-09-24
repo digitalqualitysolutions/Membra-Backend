@@ -24,6 +24,11 @@ export const ClubAddressFieldsSchema = z.object({
   zip: z.string().trim().min(1).max(14),
   city: z.string().trim().min(1).max(100),
   region: z.string().trim().max(100).optional().nullable(),
+  countryCode: z
+    .string()
+    .length(2)
+    .regex(/^[A-Z]{2}$/, "countryCode must be a 2-letter ISO country code")
+    .openapi({ example: "DK", description: "ISO-3166-1 alpha-2 country code" }),
   name: z.string().trim().min(1).max(60),
   shortName: z.string().trim().min(1).max(20),
   directions: z.string().trim().max(255).optional().nullable(),
@@ -95,6 +100,7 @@ export const CreateClubSchema = z
             zip: "2100",
             city: "Copenhagen",
             region: null,
+            countryCode: "DK",
             name: "Main hall",
             shortName: "MH",
             directions: null,
@@ -165,6 +171,7 @@ export const CreateClubSchema = z
           streetNumber: "1",
           zip: "2100",
           city: "Copenhagen",
+          countryCode: "DK",
           name: "Main hall",
           shortName: "MH",
           active: true,
@@ -272,6 +279,7 @@ export const ClubAddressResponseSchema = z
     zip: z.string(),
     city: z.string(),
     region: z.string().nullable(),
+    countryCode: z.string().nullable(),
     name: z.string(),
     shortName: z.string(),
     directions: z.string().nullable(),

@@ -12,6 +12,7 @@ const address = {
   streetNumber: "1",
   zip: "2100",
   city: "Copenhagen",
+  countryCode: "DK",
   name: "Main hall",
   shortName: "MH",
   active: true,

@@ -134,6 +134,7 @@ describe("CreateClub", () => {
           zip: "2100",
           city: "Copenhagen",
           region: null,
+          countryCode: "DK",
           name: "Main hall",
           shortName: "MH",
           directions: null,
@@ -144,6 +145,7 @@ describe("CreateClub", () => {
           streetNumber: "2",
           zip: "2100",
           city: "Copenhagen",
+          countryCode: "DK",
           name: "Annex",
           shortName: "AX",
           primary: true,
@@ -160,6 +162,7 @@ describe("CreateClub", () => {
       zip: "2100",
       city: "Copenhagen",
       region: null,
+      countryCode: "DK",
       name: "Main hall",
       shortName: "MH",
       directions: null,
@@ -331,7 +334,7 @@ describe("MakeClubAddressPrimary", () => {
       zip: "2100",
       city: "Copenhagen",
       region: null,
-      countryId: null,
+      countryCode: "DK",
       name: "Main",
       shortName: "RP",
       directions: null,
@@ -349,7 +352,7 @@ describe("MakeClubAddressPrimary", () => {
     expect(result.primary).toBe(true);
     expect(result.shortName).toBe("RP");
     expect(result.streetName).toBe("Lyngbyvej");
-    expect(result).not.toHaveProperty("countryId");
+    expect(result.countryCode).toBe("DK");
   });
 });
 

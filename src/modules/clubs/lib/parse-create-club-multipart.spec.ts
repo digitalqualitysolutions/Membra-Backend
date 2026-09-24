@@ -13,7 +13,7 @@ describe("parseCreateClubMultipartBody", () => {
       activityIds: "[1,2]",
       languages: '[{"languageId":"da","rank":1}]',
       addresses:
-        '[{"streetName":"Lyngbyvej","streetNumber":"1","zip":"2100","city":"Copenhagen","name":"Main hall","shortName":"MH"}]',
+        '[{"streetName":"Lyngbyvej","streetNumber":"1","zip":"2100","city":"Copenhagen","countryCode":"DK","name":"Main hall","shortName":"MH"}]',
     });
 
     expect(result).toEqual({
@@ -28,6 +28,7 @@ describe("parseCreateClubMultipartBody", () => {
           streetNumber: "1",
           zip: "2100",
           city: "Copenhagen",
+          countryCode: "DK",
           name: "Main hall",
           shortName: "MH",
         },

@@ -49,6 +49,7 @@ export type ClubDetail = {
     zip: string;
     city: string;
     region: string | null;
+    countryCode: string | null;
     name: string;
     shortName: string;
     directions: string | null;
@@ -108,6 +109,7 @@ export class ClubDetailAssembler {
         zip: row.zip,
         city: row.city,
         region: row.region,
+        countryCode: row.countryCode,
         name: row.name,
         shortName: row.shortName,
         directions: row.directions,
@@ -226,6 +228,7 @@ export class CreateClub {
             zip: address.zip,
             city: address.city,
             region: address.region ?? null,
+            countryCode: address.countryCode,
             name: address.name,
             shortName: address.shortName,
             directions: address.directions ?? null,

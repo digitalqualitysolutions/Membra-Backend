@@ -148,6 +148,13 @@
       "when": 1791000000000,
       "tag": "0020_statuses",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1791100000000,
+      "tag": "0021_club_addresses_country_code",
+      "breakpoints": true
     }
   ]
 }

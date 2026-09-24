@@ -182,7 +182,7 @@ function parseAddresses(value: unknown): unknown {
     return JSON.parse(trimmed) as unknown;
   } catch {
     throw new ValidationError(
-      'addresses must be valid JSON like [{"streetName":"Lyngbyvej","streetNumber":"1","zip":"2100","city":"Copenhagen","name":"Main hall","shortName":"MH"}]',
+      'addresses must be valid JSON like [{"streetName":"Lyngbyvej","streetNumber":"1","zip":"2100","city":"Copenhagen","countryCode":"DK","name":"Main hall","shortName":"MH"}]',
     );
   }
 }

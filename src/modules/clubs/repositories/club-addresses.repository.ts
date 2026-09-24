@@ -13,6 +13,7 @@ export type ClubAddressInsert = {
   zip: string;
   city: string;
   region: string | null;
+  countryCode: string | null;
   name: string;
   shortName: string;
   directions: string | null;

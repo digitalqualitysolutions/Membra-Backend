@@ -62,7 +62,7 @@ const CreateClubMultipartSchema = z
     }),
     addresses: z.string().optional().openapi({
       example:
-        '[{"streetName":"Lyngbyvej","streetNumber":"1","zip":"2100","city":"Copenhagen","name":"Main hall","shortName":"MH","active":true}]',
+        '[{"streetName":"Lyngbyvej","streetNumber":"1","zip":"2100","city":"Copenhagen","countryCode":"DK","name":"Main hall","shortName":"MH","active":true}]',
       description:
         "Optional addresses as a JSON array. `primary` is optional/ignored — the first address becomes primary and the rest are non-primary. Do not wrap the whole value in extra quotes.",
     }),

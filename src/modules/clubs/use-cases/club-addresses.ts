@@ -23,6 +23,7 @@ function mapAddress(row: ClubAddressRow) {
     zip: row.zip,
     city: row.city,
     region: row.region,
+    countryCode: row.countryCode,
     name: row.name,
     shortName: row.shortName,
     directions: row.directions,
@@ -84,6 +85,7 @@ export class AddClubAddress {
           zip: input.zip,
           city: input.city,
           region: input.region ?? null,
+          countryCode: input.countryCode,
           name: input.name,
           shortName: input.shortName,
           directions: input.directions ?? null,
@@ -157,6 +159,7 @@ export class UpdateClubAddress {
           zip: string;
           city: string;
           region: string | null;
+          countryCode: string | null;
           name: string;
           shortName: string;
           directions: string | null;
@@ -170,6 +173,8 @@ export class UpdateClubAddress {
         if (input.zip !== undefined) patch.zip = input.zip;
         if (input.city !== undefined) patch.city = input.city;
         if (input.region !== undefined) patch.region = input.region;
+        if (input.countryCode !== undefined)
+          patch.countryCode = input.countryCode;
         if (input.name !== undefined) patch.name = input.name;
         if (input.shortName !== undefined) patch.shortName = input.shortName;
         if (input.directions !== undefined) patch.directions = input.directions;

@@ -526,8 +526,7 @@ export const clubAddressesInApp = app.table("club_addresses", {
 	zip: varchar({ length: 14 }).notNull(),
 	city: varchar({ length: 100 }).notNull(),
 	region: varchar({ length: 100 }),
-	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
-	countryId: bigint("country_id", { mode: "number" }),
+	countryCode: varchar("country_code", { length: 2 }),
 	name: varchar({ length: 60 }).notNull(),
 	shortName: varchar("short_name", { length: 20 }).notNull(),
 	directions: varchar({ length: 255 }),
