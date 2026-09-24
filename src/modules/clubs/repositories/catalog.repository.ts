@@ -27,6 +27,7 @@ export class CatalogRepository {
       .select({
         id: languagesInApp.id,
         name: languagesInApp.name,
+        isDefault: languagesInApp.isDefault,
         active: languagesInApp.active,
       })
       .from(languagesInApp)

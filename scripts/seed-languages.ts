@@ -7,9 +7,9 @@ import * as schema from "../src/db/schema";
 import { languagesInApp } from "../src/db/schema";
 
 const LANGUAGES = [
-  { id: "da", name: "Danish" },
-  { id: "en-US", name: "English (US)" },
-  { id: "en-GB", name: "English (UK)" },
+  { id: "da", name: "Danish", isDefault: true },
+  { id: "en-US", name: "English (US)", isDefault: false },
+  { id: "en-GB", name: "English (UK)", isDefault: false },
 ] as const;
 
 async function seedLanguages(): Promise<void> {
@@ -37,6 +37,8 @@ async function seedLanguages(): Promise<void> {
       .select({
         id: languagesInApp.id,
         name: languagesInApp.name,
+        isDefault: languagesInApp.isDefault,
+        active: languagesInApp.active,
       })
       .from(languagesInApp)
       .orderBy(languagesInApp.id);
@@ -45,7 +47,9 @@ async function seedLanguages(): Promise<void> {
       `Seeded languages: inserted ${inserted.length} new row(s); ${all.length} total.`,
     );
     for (const row of all) {
-      console.log(`  id=${row.id} name=${row.name}`);
+      console.log(
+        `  id=${row.id} name=${row.name} isDefault=${row.isDefault} active=${row.active}`,
+      );
     }
   } finally {
     await client.end({ timeout: 5 });

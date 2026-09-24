@@ -360,6 +360,7 @@ export const LanguageCatalogItemSchema = z
   .object({
     id: z.string(),
     name: z.string(),
+    isDefault: z.boolean(),
     active: z.boolean(),
   })
   .openapi("LanguageCatalogItem");

@@ -155,6 +155,13 @@
       "when": 1791100000000,
       "tag": "0021_club_addresses_country_code",
       "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1791200000000,
+      "tag": "0022_languages_is_default_is_active",
+      "breakpoints": true
     }
   ]
 }

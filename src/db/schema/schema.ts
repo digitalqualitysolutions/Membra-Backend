@@ -249,10 +249,15 @@ export const activitiesInApp = app.table("activities", {
 export const languagesInApp = app.table("languages", {
 	id: varchar({ length: 15 }).primaryKey().notNull(),
 	name: varchar({ length: 80 }).notNull(),
-	active: boolean().default(true).notNull(),
+	isDefault: boolean("is_default").default(false).notNull(),
+	active: boolean("is_active").default(true).notNull(),
 	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-});
+}, (table) => [
+	uniqueIndex("languages_one_default")
+		.on(table.isDefault)
+		.where(sql`"is_default" IS TRUE`),
+]);
 
 export const clubAdminsInApp = app.table("club_admins", {
 	clubId: bigint("club_id", { mode: "number" }).notNull(),
