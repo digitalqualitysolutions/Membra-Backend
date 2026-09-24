@@ -1,7 +1,11 @@
 import type { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
 import { registerAuthDocs } from "@/modules/auth";
-import { registerClubsDocs, registerSeasonsDocs } from "@/modules/clubs";
+import {
+  registerClubsDocs,
+  registerSeasonsDocs,
+  registerTeamsDocs,
+} from "@/modules/clubs";
 
 export type ModuleDocsRegistrar = (registry: OpenAPIRegistry) => void;
 
@@ -12,6 +16,7 @@ export const moduleDocsRegistrars: ModuleDocsRegistrar[] = [
   registerAuthDocs,
   registerClubsDocs,
   registerSeasonsDocs,
+  registerTeamsDocs,
 ];
 
 export function registerAllModuleDocs(registry: OpenAPIRegistry): void {

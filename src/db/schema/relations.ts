@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm/relations";
-import { usersInApp, userSecurityNumbersInApp, clubsInApp, clubAgeGroupsInApp, clubEmailsInApp, clubQuestionnairesInApp, clubQuestionnaireDetailsInApp, clubWaitlistsInApp, gendersInApp, userAddressesInApp, clubPhoneNumbersInApp, locationGroupsInApp, locationRelationsInApp, locationsInApp, seasonsInApp, clubAddressesInApp, userAliasesInApp, userEmailsInApp, userPhoneNumbersInApp, userCredentialsInApp, authSessionsInApp, passwordResetTokensInApp, userAvatarsInApp, clubAdminsInApp, clubActivitiesInApp, clubLanguagesInApp, clubAvatarsInApp, activitiesInApp, languagesInApp } from "./schema";
+import { usersInApp, userSecurityNumbersInApp, clubsInApp, clubAgeGroupsInApp, clubEmailsInApp, clubQuestionnairesInApp, clubQuestionnaireDetailsInApp, clubWaitlistsInApp, gendersInApp, userAddressesInApp, clubPhoneNumbersInApp, locationGroupsInApp, locationRelationsInApp, locationsInApp, seasonsInApp, teamsInApp, clubAddressesInApp, userAliasesInApp, userEmailsInApp, userPhoneNumbersInApp, userCredentialsInApp, authSessionsInApp, passwordResetTokensInApp, userAvatarsInApp, clubAdminsInApp, clubActivitiesInApp, clubLanguagesInApp, clubAvatarsInApp, activitiesInApp, languagesInApp, colorsInApp } from "./schema";
 
 export const userSecurityNumbersInAppRelations = relations(userSecurityNumbersInApp, ({one}) => ({
 	usersInApp: one(usersInApp, {
@@ -35,11 +35,12 @@ export const usersInAppRelations = relations(usersInApp, ({one, many}) => ({
 	}),
 }));
 
-export const clubAgeGroupsInAppRelations = relations(clubAgeGroupsInApp, ({one}) => ({
+export const clubAgeGroupsInAppRelations = relations(clubAgeGroupsInApp, ({one, many}) => ({
 	clubsInApp: one(clubsInApp, {
 		fields: [clubAgeGroupsInApp.clubId],
 		references: [clubsInApp.id]
 	}),
+	teamsInApps: many(teamsInApp),
 }));
 
 export const clubsInAppRelations = relations(clubsInApp, ({one, many}) => ({
@@ -51,6 +52,7 @@ export const clubsInAppRelations = relations(clubsInApp, ({one, many}) => ({
 	locationGroupsInApps: many(locationGroupsInApp),
 	locationsInApps: many(locationsInApp),
 	seasonsInApps: many(seasonsInApp),
+	teamsInApps: many(teamsInApp),
 	clubAddressesInApps: many(clubAddressesInApp),
 	clubAdminsInApps: many(clubAdminsInApp),
 	clubActivitiesInApps: many(clubActivitiesInApp),
@@ -210,6 +212,25 @@ export const seasonsInAppRelations = relations(seasonsInApp, ({one}) => ({
 	clubsInApp: one(clubsInApp, {
 		fields: [seasonsInApp.clubId],
 		references: [clubsInApp.id]
+	}),
+}));
+
+export const teamsInAppRelations = relations(teamsInApp, ({one}) => ({
+	clubsInApp: one(clubsInApp, {
+		fields: [teamsInApp.clubId],
+		references: [clubsInApp.id]
+	}),
+	gendersInApp: one(gendersInApp, {
+		fields: [teamsInApp.genderId],
+		references: [gendersInApp.id]
+	}),
+	clubAgeGroupsInApp: one(clubAgeGroupsInApp, {
+		fields: [teamsInApp.ageGroupId],
+		references: [clubAgeGroupsInApp.id]
+	}),
+	colorsInApp: one(colorsInApp, {
+		fields: [teamsInApp.colorId],
+		references: [colorsInApp.id]
 	}),
 }));
 

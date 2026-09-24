@@ -22,6 +22,7 @@
     "db:seed:roles": "tsx scripts/seed-roles.ts",
     "db:seed:colors": "tsx scripts/seed-colors.ts",
     "db:seed:statuses": "tsx scripts/seed-statuses.ts",
+    "db:seed:teams": "tsx scripts/seed-teams.ts",
     "db:seed:dev-user": "tsx scripts/seed-dev-user.ts"
   },
   "dependencies": {

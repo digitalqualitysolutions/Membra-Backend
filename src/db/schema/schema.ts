@@ -440,6 +440,50 @@ export const seasonsInApp = app.table("seasons", {
 	check("seasons_end_gte_start_check", sql`season_end >= season_start`),
 ]);
 
+export const teamsInApp = app.table("teams", {
+	id: bigint({ mode: "number" }).primaryKey().generatedByDefaultAsIdentity({ name: "app.teams_id_seq", startWith: 1, increment: 1, minValue: 1, cache: 1 }),
+	clubId: bigint("club_id", { mode: "number" }).notNull(),
+	name: varchar({ length: 60 }).notNull(),
+	shortName: varchar("short_name", { length: 10 }).notNull(),
+	seasonal: boolean("is_seasonal").notNull(),
+	hasWaitlistMembers: boolean("has_waitlist_members").notNull(),
+	hasWaitlistPublic: boolean("has_waitlist_public").notNull(),
+	onlyTeamMembers: boolean("only_team_members").notNull(),
+	areEventsPublic: boolean("are_events_public").notNull(),
+	genderId: bigint("gender_id", { mode: "number" }),
+	ageGroupId: bigint("age_group_id", { mode: "number" }),
+	rankGroupId: bigint("rank_group_id", { mode: "number" }),
+	teamRankInGroup: integer("team_rank_in_group"),
+	rankPublic: boolean("is_rank_public"),
+	colorId: bigint("color_id", { mode: "number" }),
+	textWhite: boolean("is_text_white"),
+	active: boolean("is_active").default(true).notNull(),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+}, (table) => [
+	index("teams_club_id_idx").using("btree", table.clubId.asc().nullsLast().op("int8_ops")),
+	foreignKey({
+			columns: [table.clubId],
+			foreignColumns: [clubsInApp.id],
+			name: "teams_club_id_fkey"
+		}).onDelete("cascade"),
+	foreignKey({
+			columns: [table.genderId],
+			foreignColumns: [gendersInApp.id],
+			name: "teams_gender_id_fkey"
+		}).onDelete("set null"),
+	foreignKey({
+			columns: [table.ageGroupId],
+			foreignColumns: [clubAgeGroupsInApp.id],
+			name: "teams_age_group_id_fkey"
+		}).onDelete("set null"),
+	foreignKey({
+			columns: [table.colorId],
+			foreignColumns: [colorsInApp.id],
+			name: "teams_color_id_fkey"
+		}).onDelete("set null"),
+]);
+
 export const userAliasesInApp = app.table("user_aliases", {
 	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
 	id: bigint({ mode: "number" }).primaryKey().generatedByDefaultAsIdentity({ name: "app.alias_id_seq", startWith: 1, increment: 1, minValue: 1, cache: 1 }),

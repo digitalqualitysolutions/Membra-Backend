@@ -122,6 +122,17 @@ Nested under a club; documented under the **Club Seasons** Swagger tag (separate
 | GET | `/api/clubs/:clubId/seasons/:seasonId` | Season detail (member/admin) |
 | PATCH | `/api/clubs/:clubId/seasons/:seasonId` | Update season; soft-off via `active` (admin) |
 
+### Club Teams
+
+Nested under a club; documented under the **Club Teams** Swagger tag.
+
+| Method | Path | Notes |
+|--------|------|-------|
+| GET | `/api/clubs/:clubId/teams` | List teams (member/admin) |
+| POST | `/api/clubs/:clubId/teams` | Create team (admin) |
+| GET | `/api/clubs/:clubId/teams/:teamId` | Team detail (member/admin) |
+| PATCH | `/api/clubs/:clubId/teams/:teamId` | Update team; soft-off via `active` (admin) |
+
 ## API Documentation
 
 | `ENABLE_API_DOCS` | Behavior |

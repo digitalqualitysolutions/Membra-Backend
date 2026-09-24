@@ -1,7 +1,9 @@
 export { ClubsController } from "./controllers/clubs.controller";
 export { SeasonsController } from "./controllers/seasons.controller";
+export { TeamsController } from "./controllers/teams.controller";
 export { registerClubsDocs } from "./docs/paths";
 export { registerSeasonsDocs } from "./docs/seasons-paths";
+export { registerTeamsDocs } from "./docs/teams-paths";
 export {
   CreateClubSchema,
   UpdateClubSchema,
