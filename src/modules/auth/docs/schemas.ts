@@ -19,6 +19,7 @@ import {
   SignupResponseSchema,
   SignupSchema,
   StatusesResponseSchema,
+  LanguagesResponseSchema,
 } from "../schemas/auth.schema";
 
 export function registerAuthSchemas(registry: OpenAPIRegistry): void {
@@ -38,6 +39,7 @@ export function registerAuthSchemas(registry: OpenAPIRegistry): void {
   registry.register("RolesResponse", RolesResponseSchema);
   registry.register("ColorsResponse", ColorsResponseSchema);
   registry.register("StatusesResponse", StatusesResponseSchema);
+  registry.register("LanguagesResponse", LanguagesResponseSchema);
   registry.register("MessageResponse", MessageResponseSchema);
   registry.register("AvatarsResponse", AvatarsResponseSchema);
 }

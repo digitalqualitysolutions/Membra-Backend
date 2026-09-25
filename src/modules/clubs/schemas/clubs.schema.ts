@@ -9,7 +9,7 @@ export const ClubLanguageInputSchema = z
   .object({
     languageId: z.string().trim().min(1).max(15).openapi({
       example: "da",
-      description: "Language id from GET /api/clubs/languages",
+      description: "Language id from GET /api/reference/languages",
     }),
     rank: z.number().int().min(1).max(20).openapi({
       example: 1,
@@ -369,7 +369,7 @@ export const LanguagesResponseSchema = z
   .object({
     languages: z.array(LanguageCatalogItemSchema),
   })
-  .openapi("LanguagesResponse");
+  .openapi("ClubLanguagesResponse");
 
 function refineMemberBooking(
   value: {

@@ -79,6 +79,7 @@ Session TTL is 24 hours by default (signup and login). `rememberMe: true` on log
 | GET | `/api/reference/roles` | Reference rows from `app.roles` (`{ id, role, roleShort }`) |
 | GET | `/api/reference/colors` | Reference rows from `app.colors` (`{ id, color, hex, isPublic, isTextBlack }`) |
 | GET | `/api/reference/statuses` | Reference rows from `app.statuses` (`{ id, status }`) |
+| GET | `/api/reference/languages` | Reference rows from `app.languages` (`{ id, name, isDefault, active }`) |
 
 Signup / login / forgot-password / reset-password are rate limited (5 requests / minute / IP).
 
@@ -96,7 +97,7 @@ Any authenticated user can create a club and becomes its first admin (`club_admi
 
 | Method | Path | Notes |
 |--------|------|-------|
-| GET | `/api/clubs/languages` | Language catalog |
+| GET | `/api/clubs/languages` | Language catalog (prefer `GET /api/reference/languages`) |
 | GET | `/api/clubs` | Clubs the current user admins (summary cards + signed `avatar` from avatar2) |
 | POST | `/api/clubs` | Multipart create; creator becomes admin; optional `avatar` File or Blob |
 | GET | `/api/clubs/:clubId` | Club detail including signed `avatar` (**member/admin only**) |

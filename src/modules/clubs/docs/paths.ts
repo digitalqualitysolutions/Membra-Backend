@@ -121,6 +121,9 @@ export function registerClubsDocs(registry: OpenAPIRegistry): void {
     path: "/api/clubs/languages",
     tags: [CLUBS_TAG],
     summary: "List languages catalog",
+    description:
+      "Deprecated alias of GET /api/reference/languages. Prefer the Reference endpoint.",
+    deprecated: true,
     security: [{ SessionCookie: [] }],
     responses: {
       200: {

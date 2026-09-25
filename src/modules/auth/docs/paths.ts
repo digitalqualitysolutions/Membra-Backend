@@ -22,6 +22,7 @@ import {
   SignupResponseSchema,
   SignupSchema,
   StatusesResponseSchema,
+  LanguagesResponseSchema,
 } from "../schemas/auth.schema";
 import { registerAuthSchemas } from "./schemas";
 
@@ -347,6 +348,22 @@ export function registerAuthDocs(registry: OpenAPIRegistry): void {
       200: {
         description: "Status reference data",
         content: { "application/json": { schema: StatusesResponseSchema } },
+      },
+      ...standardErrorResponses([500]),
+    },
+  });
+
+  registry.registerPath({
+    method: "get",
+    path: "/api/reference/languages",
+    tags: [REFERENCE_TAG],
+    summary: "List languages",
+    description:
+      "Active reference rows from app.languages (`id`, `name`, `isDefault`, `active`), ordered by id.",
+    responses: {
+      200: {
+        description: "Language reference data",
+        content: { "application/json": { schema: LanguagesResponseSchema } },
       },
       ...standardErrorResponses([500]),
     },

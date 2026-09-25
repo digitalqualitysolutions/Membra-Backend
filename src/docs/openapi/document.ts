@@ -55,7 +55,8 @@ export function generateOpenApiDocument(): OpenApiDocument {
       },
       {
         name: "Reference",
-        description: "Lookup catalogs (genders, …)",
+        description:
+          "Lookup catalogs (genders, activities, roles, colors, statuses, languages)",
       },
       {
         name: "Clubs",

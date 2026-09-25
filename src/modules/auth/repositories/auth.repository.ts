@@ -128,6 +128,23 @@ export class AuthRepository {
       .orderBy(asc(statusesInApp.id));
   }
 
+  async listLanguages(
+    dbOrTx: DbOrTx,
+  ): Promise<
+    { id: string; name: string; isDefault: boolean; active: boolean }[]
+  > {
+    return dbOrTx
+      .select({
+        id: languagesInApp.id,
+        name: languagesInApp.name,
+        isDefault: languagesInApp.isDefault,
+        active: languagesInApp.active,
+      })
+      .from(languagesInApp)
+      .where(eq(languagesInApp.active, true))
+      .orderBy(asc(languagesInApp.id));
+  }
+
   async findGenderIdByEnum(
     dbOrTx: DbOrTx,
     gender: GenderEnum,

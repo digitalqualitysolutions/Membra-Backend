@@ -3,6 +3,7 @@ import { Controller, Get, HttpCode, Inject } from "@nestjs/common";
 import { ListActivities } from "../use-cases/list-activities";
 import { ListColors } from "../use-cases/list-colors";
 import { ListGenders } from "../use-cases/list-genders";
+import { ListLanguages } from "../use-cases/list-languages";
 import { ListRoles } from "../use-cases/list-roles";
 import { ListStatuses } from "../use-cases/list-statuses";
 
@@ -15,6 +16,8 @@ export class ReferenceController {
     @Inject(ListRoles) private readonly listRolesUseCase: ListRoles,
     @Inject(ListColors) private readonly listColorsUseCase: ListColors,
     @Inject(ListStatuses) private readonly listStatusesUseCase: ListStatuses,
+    @Inject(ListLanguages)
+    private readonly listLanguagesUseCase: ListLanguages,
   ) {}
 
   @Get("genders")
@@ -45,5 +48,11 @@ export class ReferenceController {
   @HttpCode(200)
   async statuses() {
     return this.listStatusesUseCase.execute();
+  }
+
+  @Get("languages")
+  @HttpCode(200)
+  async languages() {
+    return this.listLanguagesUseCase.execute();
   }
 }

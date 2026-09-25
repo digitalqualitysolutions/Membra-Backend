@@ -31,7 +31,7 @@ export const preferredLangSchema = z
   .max(15)
   .openapi({
     example: "en-US",
-    description: "Language id from GET /api/clubs/languages",
+    description: "Language id from GET /api/reference/languages",
   });
 
 export const SignupSchema = z
@@ -181,6 +181,21 @@ export const StatusesResponseSchema = z
     statuses: z.array(StatusRowSchema),
   })
   .openapi("StatusesResponse");
+
+export const LanguageRowSchema = z
+  .object({
+    id: z.string().openapi({ example: "da" }),
+    name: z.string().openapi({ example: "Danish" }),
+    isDefault: z.boolean().openapi({ example: true }),
+    active: z.boolean().openapi({ example: true }),
+  })
+  .openapi("LanguageRow");
+
+export const LanguagesResponseSchema = z
+  .object({
+    languages: z.array(LanguageRowSchema),
+  })
+  .openapi("LanguagesResponse");
 
 export const SafeUserSchema = z
   .object({
