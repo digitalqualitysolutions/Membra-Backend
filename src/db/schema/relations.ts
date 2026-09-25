@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm/relations";
-import { usersInApp, userSecurityNumbersInApp, clubsInApp, clubAgeGroupsInApp, clubEmailsInApp, clubQuestionnairesInApp, clubQuestionnaireDetailsInApp, clubWaitlistsInApp, gendersInApp, userAddressesInApp, clubPhoneNumbersInApp, locationGroupsInApp, locationRelationsInApp, locationsInApp, seasonsInApp, teamsInApp, teamSeasonsInApp, clubAddressesInApp, userAliasesInApp, userEmailsInApp, userPhoneNumbersInApp, userCredentialsInApp, authSessionsInApp, passwordResetTokensInApp, userAvatarsInApp, clubAdminsInApp, clubActivitiesInApp, clubLanguagesInApp, clubAvatarsInApp, activitiesInApp, languagesInApp, colorsInApp } from "./schema";
+import { usersInApp, userSecurityNumbersInApp, clubsInApp, clubAgeGroupsInApp, clubEmailsInApp, clubQuestionnairesInApp, clubQuestionnaireDetailsInApp, clubWaitlistsInApp, gendersInApp, userAddressesInApp, clubPhoneNumbersInApp, locationGroupsInApp, locationRelationsInApp, locationsInApp, seasonsInApp, teamsInApp, teamSeasonsInApp, schedulesInApp, clubAddressesInApp, userAliasesInApp, userEmailsInApp, userPhoneNumbersInApp, userCredentialsInApp, authSessionsInApp, passwordResetTokensInApp, userAvatarsInApp, clubAdminsInApp, clubActivitiesInApp, clubLanguagesInApp, clubAvatarsInApp, activitiesInApp, languagesInApp, colorsInApp } from "./schema";
 
 export const userSecurityNumbersInAppRelations = relations(userSecurityNumbersInApp, ({one}) => ({
 	usersInApp: one(usersInApp, {
@@ -175,6 +175,7 @@ export const locationGroupsInAppRelations = relations(locationGroupsInApp, ({one
 		references: [clubsInApp.id]
 	}),
 	locationRelationsInApps: many(locationRelationsInApp),
+	schedulesInApps: many(schedulesInApp),
 }));
 
 export const locationRelationsInAppRelations = relations(locationRelationsInApp, ({one}) => ({
@@ -206,6 +207,7 @@ export const locationsInAppRelations = relations(locationsInApp, ({one, many}) =
 	locationsInApps: many(locationsInApp, {
 		relationName: "locationsInApp_parentLocationId_locationsInApp_id"
 	}),
+	schedulesInApps: many(schedulesInApp),
 }));
 
 export const seasonsInAppRelations = relations(seasonsInApp, ({one, many}) => ({
@@ -236,7 +238,7 @@ export const teamsInAppRelations = relations(teamsInApp, ({one, many}) => ({
 	teamSeasonsInApps: many(teamSeasonsInApp),
 }));
 
-export const teamSeasonsInAppRelations = relations(teamSeasonsInApp, ({one}) => ({
+export const teamSeasonsInAppRelations = relations(teamSeasonsInApp, ({one, many}) => ({
 	teamsInApp: one(teamsInApp, {
 		fields: [teamSeasonsInApp.teamId],
 		references: [teamsInApp.id]
@@ -244,6 +246,22 @@ export const teamSeasonsInAppRelations = relations(teamSeasonsInApp, ({one}) => 
 	seasonsInApp: one(seasonsInApp, {
 		fields: [teamSeasonsInApp.seasonId],
 		references: [seasonsInApp.id]
+	}),
+	schedulesInApps: many(schedulesInApp),
+}));
+
+export const schedulesInAppRelations = relations(schedulesInApp, ({one}) => ({
+	teamSeasonsInApp: one(teamSeasonsInApp, {
+		fields: [schedulesInApp.teamSeasonId],
+		references: [teamSeasonsInApp.id]
+	}),
+	locationsInApp: one(locationsInApp, {
+		fields: [schedulesInApp.locationId],
+		references: [locationsInApp.id]
+	}),
+	locationGroupsInApp: one(locationGroupsInApp, {
+		fields: [schedulesInApp.locationGroupId],
+		references: [locationGroupsInApp.id]
 	}),
 }));
 

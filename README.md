@@ -144,6 +144,16 @@ Nested under a club; documented under the **Club Team Seasons** Swagger tag.
 | POST | `/api/clubs/:clubId/team-seasons` | Assign team to season; body `{ teamId, seasonId }` (admin) |
 | PATCH | `/api/clubs/:clubId/team-seasons/:teamSeasonId` | Update signup bounds / soft-off via `active` (admin) |
 
+### Club Schedules
+
+Nested under a club; documented under the **Club Schedules** Swagger tag. `durationMinutes` is integer minutes; provide either `locationId` or `locationGroupId`, not both.
+
+| Method | Path | Notes |
+|--------|------|-------|
+| GET | `/api/clubs/:clubId/schedules` | List schedules for the club’s team–seasons (member/admin) |
+| POST | `/api/clubs/:clubId/schedules` | Create schedule; body `{ teamSeasonId, startTime, rrule, durationMinutes }` (admin) |
+| PATCH | `/api/clubs/:clubId/schedules/:scheduleId` | Update schedule / soft-off via `active` (admin) |
+
 ## API Documentation
 
 | `ENABLE_API_DOCS` | Behavior |

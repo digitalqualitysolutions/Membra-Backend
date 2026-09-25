@@ -74,6 +74,11 @@ export function generateOpenApiDocument(): OpenApiDocument {
         name: "Club Team Seasons",
         description: "Assign teams to seasons (signup bounds, active)",
       },
+      {
+        name: "Club Schedules",
+        description:
+          "Recurring schedules for team–seasons (rrule, duration, locations)",
+      },
     ],
   });
 }

@@ -1,4 +1,4 @@
-import { pgSchema, foreignKey, bigint, uuid, varchar, boolean, timestamp, check, smallint, unique, uniqueIndex, date, integer, index, text, primaryKey } from "drizzle-orm/pg-core"
+import { pgSchema, foreignKey, bigint, uuid, varchar, boolean, timestamp, check, smallint, unique, uniqueIndex, date, time, integer, index, text, primaryKey } from "drizzle-orm/pg-core"
 import { sql } from "drizzle-orm"
 
 export const app = pgSchema("app");
@@ -507,6 +507,41 @@ export const teamSeasonsInApp = app.table("team_seasons", {
 			name: "team_seasons_season_id_fkey"
 		}).onDelete("cascade"),
 	check("team_seasons_signup_range_check", sql`("min_signup" IS NULL) OR ("max_signup" IS NULL) OR ("max_signup" >= "min_signup")`),
+]);
+
+export const schedulesInApp = app.table("schedules", {
+	id: bigint({ mode: "number" }).primaryKey().generatedByDefaultAsIdentity({ name: "app.schedules_id_seq", startWith: 1, increment: 1, minValue: 1, cache: 1 }),
+	teamSeasonId: bigint("team_season_id", { mode: "number" }).notNull(),
+	startTime: time("start_time").notNull(),
+	rrule: varchar({ length: 255 }).notNull(),
+	durationMinutes: integer("duration_minutes").notNull(),
+	startDate: date("start_date"),
+	endDate: date("end_date"),
+	locationId: bigint("location_id", { mode: "number" }),
+	locationGroupId: bigint("location_group_id", { mode: "number" }),
+	active: boolean("is_active").default(true).notNull(),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+}, (table) => [
+	index("schedules_team_season_id_idx").using("btree", table.teamSeasonId.asc().nullsLast().op("int8_ops")),
+	foreignKey({
+			columns: [table.teamSeasonId],
+			foreignColumns: [teamSeasonsInApp.id],
+			name: "schedules_team_season_id_fkey"
+		}).onDelete("cascade"),
+	foreignKey({
+			columns: [table.locationId],
+			foreignColumns: [locationsInApp.id],
+			name: "schedules_location_id_fkey"
+		}).onDelete("set null"),
+	foreignKey({
+			columns: [table.locationGroupId],
+			foreignColumns: [locationGroupsInApp.id],
+			name: "schedules_location_group_id_fkey"
+		}).onDelete("set null"),
+	check("schedules_duration_minutes_check", sql`"duration_minutes" > 0`),
+	check("schedules_date_range_check", sql`("start_date" IS NULL) OR ("end_date" IS NULL) OR ("end_date" >= "start_date")`),
+	check("schedules_one_location_ref_check", sql`("location_id" IS NULL) OR ("location_group_id" IS NULL)`),
 ]);
 
 export const userAliasesInApp = app.table("user_aliases", {

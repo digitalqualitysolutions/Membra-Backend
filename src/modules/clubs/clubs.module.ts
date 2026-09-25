@@ -3,6 +3,7 @@ import { Module } from "@nestjs/common";
 import { AuthModule } from "@/modules/auth/auth.module";
 
 import { ClubsController } from "./controllers/clubs.controller";
+import { SchedulesController } from "./controllers/schedules.controller";
 import { SeasonsController } from "./controllers/seasons.controller";
 import { TeamSeasonsController } from "./controllers/team-seasons.controller";
 import { TeamsController } from "./controllers/teams.controller";
@@ -12,6 +13,7 @@ import { ClubAddressesRepository } from "./repositories/club-addresses.repositor
 import { ClubAvatarsRepository } from "./repositories/club-avatars.repository";
 import { ClubsRepository } from "./repositories/clubs.repository";
 import { LocationsRepository } from "./repositories/locations.repository";
+import { SchedulesRepository } from "./repositories/schedules.repository";
 import { SeasonsRepository } from "./repositories/seasons.repository";
 import { TeamSeasonsRepository } from "./repositories/team-seasons.repository";
 import { TeamsRepository } from "./repositories/teams.repository";
@@ -46,6 +48,11 @@ import {
   UpdateTeam,
 } from "./use-cases/teams";
 import {
+  CreateSchedule,
+  ListSchedules,
+  UpdateSchedule,
+} from "./use-cases/schedules";
+import {
   CreateTeamSeason,
   ListTeamSeasons,
   UpdateTeamSeason,
@@ -59,6 +66,7 @@ import { UpdateClub } from "./use-cases/update-club";
     SeasonsController,
     TeamsController,
     TeamSeasonsController,
+    SchedulesController,
   ],
   providers: [
     ClubsRepository,
@@ -68,6 +76,7 @@ import { UpdateClub } from "./use-cases/update-club";
     SeasonsRepository,
     TeamsRepository,
     TeamSeasonsRepository,
+    SchedulesRepository,
     CatalogRepository,
     ClubAccess,
     ClubDetailAssembler,
@@ -98,6 +107,9 @@ import { UpdateClub } from "./use-cases/update-club";
     CreateTeamSeason,
     UpdateTeamSeason,
     ListTeamSeasons,
+    CreateSchedule,
+    UpdateSchedule,
+    ListSchedules,
   ],
 })
 export class ClubsModule {}
