@@ -5,6 +5,7 @@ import {
   registerClubsDocs,
   registerSeasonsDocs,
   registerTeamsDocs,
+  registerTeamSeasonsDocs,
 } from "@/modules/clubs";
 
 export type ModuleDocsRegistrar = (registry: OpenAPIRegistry) => void;
@@ -17,6 +18,7 @@ export const moduleDocsRegistrars: ModuleDocsRegistrar[] = [
   registerClubsDocs,
   registerSeasonsDocs,
   registerTeamsDocs,
+  registerTeamSeasonsDocs,
 ];
 
 export function registerAllModuleDocs(registry: OpenAPIRegistry): void {

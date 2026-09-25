@@ -70,6 +70,10 @@ export function generateOpenApiDocument(): OpenApiDocument {
         name: "Club Teams",
         description: "Club teams (membership flags, ranking, colors)",
       },
+      {
+        name: "Club Team Seasons",
+        description: "Assign teams to seasons (signup bounds, active)",
+      },
     ],
   });
 }

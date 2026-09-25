@@ -4,6 +4,7 @@ import { AuthModule } from "@/modules/auth/auth.module";
 
 import { ClubsController } from "./controllers/clubs.controller";
 import { SeasonsController } from "./controllers/seasons.controller";
+import { TeamSeasonsController } from "./controllers/team-seasons.controller";
 import { TeamsController } from "./controllers/teams.controller";
 import { ClubAccess } from "./lib/club-access";
 import { CatalogRepository } from "./repositories/catalog.repository";
@@ -12,6 +13,7 @@ import { ClubAvatarsRepository } from "./repositories/club-avatars.repository";
 import { ClubsRepository } from "./repositories/clubs.repository";
 import { LocationsRepository } from "./repositories/locations.repository";
 import { SeasonsRepository } from "./repositories/seasons.repository";
+import { TeamSeasonsRepository } from "./repositories/team-seasons.repository";
 import { TeamsRepository } from "./repositories/teams.repository";
 import {
   AddClubAddress,
@@ -43,11 +45,21 @@ import {
   ListTeams,
   UpdateTeam,
 } from "./use-cases/teams";
+import {
+  CreateTeamSeason,
+  ListTeamSeasons,
+  UpdateTeamSeason,
+} from "./use-cases/team-seasons";
 import { UpdateClub } from "./use-cases/update-club";
 
 @Module({
   imports: [AuthModule],
-  controllers: [ClubsController, SeasonsController, TeamsController],
+  controllers: [
+    ClubsController,
+    SeasonsController,
+    TeamsController,
+    TeamSeasonsController,
+  ],
   providers: [
     ClubsRepository,
     ClubAddressesRepository,
@@ -55,6 +67,7 @@ import { UpdateClub } from "./use-cases/update-club";
     LocationsRepository,
     SeasonsRepository,
     TeamsRepository,
+    TeamSeasonsRepository,
     CatalogRepository,
     ClubAccess,
     ClubDetailAssembler,
@@ -82,6 +95,9 @@ import { UpdateClub } from "./use-cases/update-club";
     UpdateTeam,
     GetTeam,
     ListTeams,
+    CreateTeamSeason,
+    UpdateTeamSeason,
+    ListTeamSeasons,
   ],
 })
 export class ClubsModule {}

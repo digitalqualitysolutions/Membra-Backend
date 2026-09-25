@@ -484,6 +484,31 @@ export const teamsInApp = app.table("teams", {
 		}).onDelete("set null"),
 ]);
 
+export const teamSeasonsInApp = app.table("team_seasons", {
+	id: bigint({ mode: "number" }).primaryKey().generatedByDefaultAsIdentity({ name: "app.team_seasons_id_seq", startWith: 1, increment: 1, minValue: 1, cache: 1 }),
+	teamId: bigint("team_id", { mode: "number" }).notNull(),
+	seasonId: bigint("season_id", { mode: "number" }).notNull(),
+	minSignup: integer("min_signup"),
+	maxSignup: integer("max_signup"),
+	active: boolean("is_active").default(true).notNull(),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+}, (table) => [
+	unique("team_seasons_team_id_season_id_key").on(table.teamId, table.seasonId),
+	index("team_seasons_season_id_idx").using("btree", table.seasonId.asc().nullsLast().op("int8_ops")),
+	foreignKey({
+			columns: [table.teamId],
+			foreignColumns: [teamsInApp.id],
+			name: "team_seasons_team_id_fkey"
+		}).onDelete("cascade"),
+	foreignKey({
+			columns: [table.seasonId],
+			foreignColumns: [seasonsInApp.id],
+			name: "team_seasons_season_id_fkey"
+		}).onDelete("cascade"),
+	check("team_seasons_signup_range_check", sql`("min_signup" IS NULL) OR ("max_signup" IS NULL) OR ("max_signup" >= "min_signup")`),
+]);
+
 export const userAliasesInApp = app.table("user_aliases", {
 	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
 	id: bigint({ mode: "number" }).primaryKey().generatedByDefaultAsIdentity({ name: "app.alias_id_seq", startWith: 1, increment: 1, minValue: 1, cache: 1 }),
